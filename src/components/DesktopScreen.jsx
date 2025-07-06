@@ -11,6 +11,7 @@ import Icon5 from '../assets/lover.png'; // Import your icon image    
 import Icon6 from '../assets/summer.png'; // Import your icon image
 import Icon7 from '../assets/badge.png'; // Import your icon image
 import Icon8 from '../assets/Egg.png'; // Import your icon image
+import Icon9 from '../assets/jump.png'; // Import your icon image
 
 const DesktopScreen = ({ username, pfpUrl, ghibliBackground }) => {
   // Project data (replace with your actual project names and URLs)
@@ -23,6 +24,7 @@ const DesktopScreen = ({ username, pfpUrl, ghibliBackground }) => {
     { id: 'proj6', name: 'Succinct Summer', icon: Icon6, url: 'https://succinctsummer.vercel.app/' },
     { id: 'proj7', name: 'Succinct Badge', icon:Icon7, url: 'https://succinctbadge.vercel.app/' },
     { id: 'proj8', name: 'ZK Egg', icon: Icon8, url: 'https://zkegg-omega.vercel.app/' },
+    { id: 'proj9', name: 'Succinct Jump', icon: Icon9, url: 'https://www.roblox.com/games/107841367088672/Succint-Jump' },
   ];
 
   // Projects to show in the taskbar (a subset of all projects)

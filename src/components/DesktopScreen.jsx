@@ -13,6 +13,11 @@ import Icon7 from '../assets/badge.png'; // Import your icon image
 import Icon8 from '../assets/Egg.png'; // Import your icon image
 import Icon9 from '../assets/jump.png'; // Import your icon image
 import Icon10 from '../assets/Strategy.png';
+import Icon11 from '../assets/TeamBlue Mosaic.jpeg';
+import Icon12 from '../assets/Team Pink Mosaic.jpeg';
+import Icon13 from '../assets/Team Purple Mosaic.jpeg';
+import Icon14 from '../assets/TeamGreen Mosaic.jpeg';
+import Icon15 from '../assets/Team Orange Mosaic.jpeg';
 
 
 const DesktopScreen = ({ username, pfpUrl, ghibliBackground }) => {
@@ -28,6 +33,11 @@ const DesktopScreen = ({ username, pfpUrl, ghibliBackground }) => {
     { id: 'proj8', name: 'ZK Egg', icon: Icon8, url: 'https://zkegg-omega.vercel.app/' },
     { id: 'proj9', name: 'Succinct Jump', icon: Icon9, url: 'https://www.roblox.com/games/107841367088672/Succint-Jump' },
     { id: 'proj10', name: 'Succinct Strategy', icon: Icon10, url: 'https://succinct-strategist.vercel.app/' },
+    { id: 'proj11', name: 'Team Blue', icon: Icon11, url: 'https://imgur.com/v3xfLra' },
+    { id: 'proj12', name: 'Team Pink', icon: Icon12, url: 'https://imgur.com/w9oWOHK' },
+    { id: 'proj13', name: 'Team Purple', icon: Icon13, url: 'https://imgur.com/WN5ctkn' },
+    { id: 'proj14', name: 'Team Green', icon: Icon14, url: 'https://imgur.com/0Cqmlkl' },
+    { id: 'proj15', name: 'Team Orange', icon: Icon15, url: 'https://imgur.com/a/oiLg1ko' },
   ];
 
   // Projects to show in the taskbar (a subset of all projects)

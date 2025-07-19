@@ -1,14 +1,14 @@
 import React from 'react';
 
-const DesktopIcons = ({ projects }) => {
+// Accept openProjectInModal as a prop
+const DesktopIcons = ({ projects, openProjectInModal }) => {
   return (
     <>
       {projects.map((project) => (
-        <a
+        <div // Changed from <a> to <div> as it's no longer a direct link
           key={project.id}
-          href={project.url}
-          target="_blank"
-          rel="noopener noreferrer"
+          // Call openProjectInModal when the icon is clicked
+          onClick={() => openProjectInModal(project.url, project.name)}
           className="flex flex-col items-center justify-center p-2 rounded-xl bg-white/30 hover:bg-white/40 transition-colors duration-200 cursor-pointer group backdrop-blur-sm shadow-lg m-2 border border-white/50"
         >
           {/* Changed from div with text/emoji to img tag */}
@@ -22,7 +22,7 @@ const DesktopIcons = ({ projects }) => {
           <span className="text-xs sm:text-sm md:text-base font-medium text-center drop-shadow-md">
             {project.name}
           </span>
-        </a>
+        </div>
       ))}
     </>
   );

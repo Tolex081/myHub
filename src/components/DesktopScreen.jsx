@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react'; // Import useState
 import DateTimeDisplay from './DateTimeDisplay';
 import XHandleDisplay from './XHandleDisplay';
 import DesktopIcons from './DesktopIcons';
@@ -23,6 +23,34 @@ import Icon17 from '../assets/pic.png';
 import Icon18 from '../assets/Gameedit.png'; // This icon can be used for the video tweet link
 
 const DesktopScreen = ({ username, pfpUrl, ghibliBackground }) => {
+  // State for managing the modal
+  const [showModal, setShowModal] = useState(false);
+  const [modalContentUrl, setModalContentUrl] = useState('');
+  const [modalTitle, setModalTitle] = useState('');
+  const [isEmbeddable, setIsEmbeddable] = useState(true); // New state to check if content is embeddable
+
+  // Function to open the modal with a specific URL and title
+  const openProjectInModal = (url, title) => {
+    setModalContentUrl(url);
+    setModalTitle(title);
+
+    // Check if the URL is from X (Twitter) or another site that blocks embedding
+    if (url.includes('x.com') || url.includes('twitter.com')) {
+      setIsEmbeddable(false); // Mark as non-embeddable
+    } else {
+      setIsEmbeddable(true); // Mark as embeddable
+    }
+    setShowModal(true);
+  };
+
+  // Function to close the modal
+  const closeModal = () => {
+    setShowModal(false);
+    setModalContentUrl('');
+    setModalTitle('');
+    setIsEmbeddable(true); // Reset to true for next open
+  };
+
   // Project data (replace with your actual project names and URLs)
   const projects = [
     { id: 'proj1', name: 'WWTBAP', icon: Icon1, url: 'https://provernaire-frontend.vercel.app/' },
@@ -100,15 +128,67 @@ const DesktopScreen = ({ username, pfpUrl, ghibliBackground }) => {
         </div>
 
         {/* Wrapper div for the grid layout of icons, pushed to the right */}
+        {/* Pass the openProjectInModal function to DesktopIcons */}
         <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-6 flex-grow justify-end">
-          <DesktopIcons projects={projects} />
+          <DesktopIcons projects={projects} openProjectInModal={openProjectInModal} />
         </div>
       </div>
 
       {/* Taskbar - Outer container styling removed, now just positions the Taskbar component */}
       <div className="relative z-20 w-full flex justify-center items-center m-2">
-        <Taskbar projects={taskbarProjects} />
+        {/* Pass the openProjectInModal function to Taskbar as well */}
+        <Taskbar projects={taskbarProjects} openProjectInModal={openProjectInModal} />
       </div>
+
+      {/* Modal Component */}
+      {showModal && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-70 backdrop-blur-sm">
+          <div className="relative w-[95%] h-[95%] max-w-6xl bg-gradient-to-br from-blue-900 to-purple-900 rounded-lg shadow-2xl border border-blue-600 flex flex-col overflow-hidden">
+            {/* Modal Header */}
+            <div className="flex justify-between items-center p-3 bg-gradient-to-r from-blue-700 to-purple-700 text-white rounded-t-lg shadow-md">
+              <h4 className="text-lg font-semibold truncate">{modalTitle}</h4>
+              <button
+                onClick={closeModal}
+                className="p-1 rounded-full bg-red-500 hover:bg-red-600 text-white font-bold text-sm leading-none flex items-center justify-center transition-colors duration-200"
+                aria-label="Close"
+              >
+                <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+                  <path
+                    fillRule="evenodd"
+                    d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z"
+                    clipRule="evenodd"
+                  ></path>
+                </svg>
+              </button>
+            </div>
+            {/* Modal Body - Conditional rendering based on embeddability */}
+            <div className="flex-grow bg-white p-1 flex items-center justify-center">
+              {isEmbeddable ? (
+                <iframe
+                  src={modalContentUrl}
+                  title={modalTitle}
+                  className="w-full h-full border-none rounded-b-lg"
+                  allowFullScreen
+                ></iframe>
+              ) : (
+                <div className="flex flex-col items-center justify-center text-center p-4">
+                  <p className="text-gray-800 text-lg mb-4">
+                    This content cannot be embedded directly due to security policies (e.g., from X/Twitter).
+                  </p>
+                  <a
+                    href={modalContentUrl}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="px-6 py-3 bg-blue-600 text-white rounded-lg shadow-md hover:bg-blue-700 transition-colors duration-200 text-base font-semibold"
+                  >
+                    Open in New Tab
+                  </a>
+                </div>
+              )}
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   );
 };

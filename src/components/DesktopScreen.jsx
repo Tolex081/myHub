@@ -143,7 +143,7 @@ const DesktopScreen = ({ username, pfpUrl, ghibliBackground }) => {
       {/* Modal Component */}
       {showModal && (
         <div className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-70 backdrop-blur-sm">
-          <div className="relative w-[95%] h-[95%] max-w-6xl bg-gradient-to-br from-blue-900 to-purple-900 rounded-lg shadow-2xl border border-blue-600 flex flex-col overflow-hidden">
+          <div className="relative w-full h-full max-w-6xl bg-gradient-to-br from-blue-900 to-purple-900 rounded-lg shadow-2xl border border-blue-600 flex flex-col overflow-hidden">
             {/* Modal Header */}
             <div className="flex justify-between items-center p-3 bg-gradient-to-r from-blue-700 to-purple-700 text-white rounded-t-lg shadow-md">
               <h4 className="text-lg font-semibold truncate">{modalTitle}</h4>
